@@ -60,7 +60,17 @@ pub type FxHashSet<V> = HashSet<V, BuildHasherDefault<FxHasher>>;
 pub struct FxHasher {
     hash: usize,
     
-    
+   
+    pub trait SplitChunk: Sized {
+    /// Evaluate a list of computations
+    fn evaluate(self, comp: &[Computation]) -> Self;
+    /// Evaluate a calculation transformation
+    fn calculate(self, calculation: &Calculation) -> Self;
+    /// Evaluate a `Read` operation, returning the read data
+    fn read(reader: &Reader) -> Self;
+    /// Evaluate a write operation, and write the data to the writer
+    fn write(self, writer: &Writer) -> Result<(), DataFrameError>;
+}
 pub trait Evaluate: Sized {
     /// Evaluate a list of computations
     fn evaluate(self, comp: &[Computation]) -> Self;
