@@ -131,6 +131,8 @@ impl Evaluate for DataFrame {
                                     ScalarFunction::Divide => ScalarFn::divide,
                        
 }
+                                pub struct FxHasher {
+    hash: usize,
 
 #[cfg(target_pointer_width = "32")]
 const K: usize = 0x9e3779b9;
